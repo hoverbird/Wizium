@@ -57,8 +57,9 @@ def draw (wiz):
 
 def set_grid_5 (wiz):
     wiz.grid_set_size (5,5)
-    # wiz.grid_set_box (2, 3, 'BLACK')
-    wiz.grid_write (0,2, 'BRAVE', 'H', add_block=False)
+    wiz.grid_set_box (, 3, 'BLACK')
+    wiz.grid_write (0,1, 'KOREA', 'H', add_block=False)
+    wiz.grid_write (1,0, 'JONG', 'V', add_block=False)
 
 
 # ============================================================================
@@ -117,20 +118,20 @@ def load_dictionary (wiz, dico_path):
     # Read file content
     with open (dico_path, 'r') as f:
         words = f.readlines ()
-        print("111111111111111")
-        print(words.__len__())
+        # print("111111111111111")
+        # print(words.__len__())
 
     # Remove what is not a letter, if any
     words = [re.sub('[^a-zA-Z]+', '', s) for s in words] 
-    print("2222222222222222")
-    print(words.__len__())
+    # print("2222222222222222")
+    # print(words.__len__())
 
     # Load dictionary
     wiz.dic_clear ()
     n = wiz.dic_add_entries (words)
     
-    print("33333333")
-    print ("Number of words: ")
+    # print("33333333")
+    # print ("Number of words: ")
     print (" - in file: ", len (words))
     print (" - added: ", n)
     print (" - final: ", wiz.dic_gen_num_words ())
@@ -178,7 +179,7 @@ def example_5():
     # Load the dictionary
     load_dictionary (wiz, DICO_PATH)
     set_grid_5 (wiz)
-    solve (wiz, max_black=1, heuristic_level=2) 
+    solve (wiz, max_black=2, heuristic_level=2) 
 
 def example_1():
     # Create a Wizium instance
