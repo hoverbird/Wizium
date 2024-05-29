@@ -40,8 +40,10 @@ elif platform.system()=='Darwin':
 else:
     PATH = './../../Binaries/Windows/libWizium_x64.dll'
 
-DICO_PATH = './../../Dictionaries/Fr_Simple.txt'
-
+# DICO_PATH = './../../Dictionaries/Fr_ODS4.txt'
+# DICO_PATH = './../../Dictionaries/Fr_Simple.txt'
+# DICO_PATH = './../../Dictionaries/xwordlist.txt'
+DICO_PATH = './../../Dictionaries/spreadthewordlist_unscored_high_caps.txt'
 
 # ============================================================================
 def draw (wiz):
@@ -92,8 +94,8 @@ def set_grid_2 (wiz):
             wiz.grid_set_box (6+i, 5+j, 'VOID')
 
     # Place some words on the grid
-    wiz.grid_write (0,0, 'CONSTRAINT', 'H', add_block=True)
-    wiz.grid_write (16,5, 'CONSTRAINT', 'V', add_block=True)
+    wiz.grid_write (0,0, 'OPENAI', 'H', add_block=True)
+    wiz.grid_write (16,5, 'ILLUMINATE', 'V', add_block=True)
     wiz.grid_set_box (16, 4, 'BLACK')
 
 
@@ -109,14 +111,19 @@ def load_dictionary (wiz, dico_path):
     # Read file content
     with open (dico_path, 'r') as f:
         words = f.readlines ()
+        print("111111111111111")
+        print(words.__len__())
 
     # Remove what is not a letter, if any
-    words = [re.sub('[^a-zA-Z]+', '', s) for s in words]
+    words = [re.sub('[^a-zA-Z]+', '', s) for s in words] 
+    print("2222222222222222")
+    print(words.__len__())
 
     # Load dictionary
     wiz.dic_clear ()
     n = wiz.dic_add_entries (words)
-
+    
+    print("33333333")
     print ("Number of words: ")
     print (" - in file: ", len (words))
     print (" - added: ", n)
@@ -251,7 +258,7 @@ def example_4():
 # ============================================================================
 
 # -->  C H O O S E  <--
-EXAMPLE = 4
+EXAMPLE = 1
 
 
 # Example with fixed pattern
