@@ -55,6 +55,11 @@ def draw (wiz):
     for l in lines:
         print (''.join ([s + '   ' for s in l]))
 
+def set_grid_5 (wiz):
+    wiz.grid_set_size (5,5)
+    # wiz.grid_set_box (2, 3, 'BLACK')
+    wiz.grid_write (0,2, 'BRAVE', 'H', add_block=False)
+
 
 # ============================================================================
 def set_grid_1 (wiz):
@@ -76,7 +81,8 @@ def set_grid_1 (wiz):
 
     wiz.grid_set_box (5, 1, 'BLACK')
     wiz.grid_set_box (5, 9, 'BLACK')
-
+    wiz.grid_write (0,0, 'CONSTRAINT', 'H', add_block=True)
+    wiz.grid_write (16,5, 'CONSTRAINT', 'V', add_block=True)
 
 # ============================================================================
 def set_grid_2 (wiz):
@@ -163,9 +169,16 @@ def solve (wiz, max_black=0, heuristic_level=0, seed=0, black_mode='DIAG'):
 
     # Ensure to release grid content
     wiz.solver_stop ()
-
     tend = time.time ()
     print ("Compute time: {:.01f}s".format (tend-tstart))
+
+def example_5():
+    # Create a Wizium instance
+    wiz = Wizium (os.path.join (os.getcwd (), PATH))
+    # Load the dictionary
+    load_dictionary (wiz, DICO_PATH)
+    set_grid_5 (wiz)
+    solve (wiz, max_black=1, heuristic_level=2) 
 
 def example_1():
     # Create a Wizium instance
@@ -258,13 +271,12 @@ def example_4():
 # ============================================================================
 
 # -->  C H O O S E  <--
-EXAMPLE = 1
+EXAMPLE = 5
 
 
 # Example with fixed pattern
 if EXAMPLE == 1:
     example_1()
-
 # Example with dynamic black cases placement
 elif EXAMPLE == 2:
     example_2()
@@ -275,5 +287,7 @@ elif EXAMPLE == 3:
 # Use foreign alphabet
 elif EXAMPLE == 4:
     example_4()
+elif EXAMPLE == 5:
+    example_5()
 
 exit ()
