@@ -56,10 +56,29 @@ def draw (wiz):
         print (''.join ([s + '   ' for s in l]))
 
 def set_grid_5 (wiz):
-    wiz.grid_set_size (5,5)
-    wiz.grid_set_box (, 3, 'BLACK')
-    wiz.grid_write (0,1, 'KOREA', 'H', add_block=False)
-    wiz.grid_write (1,0, 'JONG', 'V', add_block=False)
+    tx = [0, 2, 3]
+
+    wiz.grid_set_size (11,11)
+    wiz.grid_set_box (5, 5, 'BLACK')
+
+    for i in range (3):
+        wiz.grid_set_box (tx [i], 5-tx [i], 'BLACK')
+        wiz.grid_set_box (5+tx [i], tx [i], 'BLACK')
+        wiz.grid_set_box (10-tx [i], 5+tx [i], 'BLACK')
+        wiz.grid_set_box (5-tx [i], 10-tx [i], 'BLACK')
+
+    wiz.grid_write (0,8, 'KOREA', 'H', add_block=True)
+    wiz.grid_write (1,7, 'JONG', 'V', add_block=True)
+    wiz.grid_write (0,0, 'BALLOON', 'H', add_block=True)
+    wiz.grid_write (8,0, 'HMM', 'H', add_block=False)
+    wiz.grid_write (10,0, 'MANURE', 'V', add_block=True)
+
+
+    # wiz.grid_set_box (5, 1, 'BLACK')
+    # wiz.grid_set_box (5, 9, 'BLACK')
+    # wiz.grid_write (0,0, 'CONSTRAINT', 'H', add_block=True)
+    # wiz.grid_write (16,5, 'CONSTRAINT', 'V', add_block=True)
+
 
 
 # ============================================================================
@@ -84,6 +103,7 @@ def set_grid_1 (wiz):
     wiz.grid_set_box (5, 9, 'BLACK')
     wiz.grid_write (0,0, 'CONSTRAINT', 'H', add_block=True)
     wiz.grid_write (16,5, 'CONSTRAINT', 'V', add_block=True)
+    
 
 # ============================================================================
 def set_grid_2 (wiz):
@@ -179,7 +199,7 @@ def example_5():
     # Load the dictionary
     load_dictionary (wiz, DICO_PATH)
     set_grid_5 (wiz)
-    solve (wiz, max_black=2, heuristic_level=2) 
+    solve (wiz, max_black=12, heuristic_level=2) 
 
 def example_1():
     # Create a Wizium instance
